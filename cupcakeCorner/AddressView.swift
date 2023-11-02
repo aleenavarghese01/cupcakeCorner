@@ -22,7 +22,7 @@ struct AddressView: View {
                 NavigationLink{
                     CheckoutView(order: order)
                 }label: {
-                    Text("Check ")
+                    Text("Check out")
                 }
             }
             
