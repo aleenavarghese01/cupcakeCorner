@@ -8,25 +8,37 @@
 import SwiftUI
 
 struct AddressView: View {
-    @ObservedObject var order: Order
+    @ObservedObject var order = Order()
+    @State var isClicked: Bool = false
     var body: some View {
         Form{
-            Section{
-                TextField("Name", text: $order.name)
-                TextField("Street Adress", text: $order.streetAddress)
-                TextField("City", text: $order.city)
-                TextField("No.", text: $order.zip)
+            Section {
+                HStack {
+                    Text("Name : " )
+                    TextField("", text: $order.name)
+                }
+                HStack {
+                    Text("Street Adress : " )
+                    TextField("", text: $order.streetAddress)
+                }
+                HStack {
+                    Text("City : " )
+                    TextField("", text: $order.city)
+                }
+                HStack {
+                    Text("No. : ")
+                    TextField("", text: $order.zip)
+                }
 
             }
-            Section{
-                NavigationLink{
-                    CheckoutView(order: order)
-                }label: {
-                    Text("Check out")
-                }
+            Button("CheckOut"){
+                isClicked.toggle()
             }
+            .sheet(isPresented: $isClicked, content: {
+                CheckoutView(order: order)
+            })
             
-            .disabled(order.hasValidAddress == false)
+//            .disabled(order.hasValidAddress == false)
         }
         .navigationTitle("Delivery Details")
         .navigationBarTitleDisplayMode(.inline)

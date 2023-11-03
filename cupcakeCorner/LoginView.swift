@@ -8,43 +8,41 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var username = ""
+    @ObservedObject var order = Order()
+    @State var name = ""
     @State private var email = ""
     @State var isClicked: Bool = false
+    
     
     
     var body: some View {
         NavigationView{
             Form{
+                
                 Section{
-                    TextField("Username", text: $username)
-                    TextField("Email", text: $email)
+                    TextField("Username : ", text: $order.name)
+                    TextField("Email : ", text:$email)
                 }
                 
                 Section{
                     Button("Create account"){
                         print("Create account....")
-                        isClicked = true
+                        isClicked.toggle()
                     }
-                }
-                .disabled(disableForm)
-                Section{
-                    NavigationLink{
+                    .sheet(isPresented: $isClicked, content: {
                         ContentView()
-                    }
-                label:{
-                    Text("order cupcakes")
+                    })
                 }
-                }
+//                .disabled(disableForm)
             }
             .navigationBarTitle("Sign Up")
         }
     }
     var disableForm: Bool{
-        username.count < 5 || email.count < 5
+        name.count < 1 || email.count < 1
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView(order: Order())
+//}

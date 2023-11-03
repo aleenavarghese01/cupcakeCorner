@@ -6,10 +6,23 @@
 //
 
 import SwiftUI
+import CoreData
 
 class Order: ObservableObject, Codable {
+    
+    let container = NSPersistentContainer(name: "orderData")
+    init(){
+        container.loadPersistentStores { description, error in
+            if let error = error{
+                print("Core data failed to load : \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    
     enum CodingKeys: CodingKey {
-        case type, quantity, extraFrosting, addSprinkles, name, streetAddress, city, zip
+        case type, quantity, extraFrosting, addSprinkles, name, streetAddress, city, zip, itemName, didExtraFrosting, didAddFrosting
     }
     static let types = ["vanilla", "Strawberry", "choclate", "rainbow"]
     
@@ -32,6 +45,12 @@ class Order: ObservableObject, Codable {
     @Published var city = ""
     @Published var zip = ""
     
+    @Published var itemName = ""
+    
+    @Published var didExtraFrosting = ""
+    @Published var didAddFrosting = ""
+    
+    
     
     var hasValidAddress: Bool{
         if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty{
@@ -40,7 +59,7 @@ class Order: ObservableObject, Codable {
         return true
     }
     var cost: Double{
-        var cost = Double(quantity) * 2
+        var cost = Double(quantity) * 20
         
         cost += (Double(type) / 2)
         
@@ -52,7 +71,6 @@ class Order: ObservableObject, Codable {
         }
         return cost
     }
-    init() { }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -67,6 +85,9 @@ class Order: ObservableObject, Codable {
         try container.encode(streetAddress, forKey: .streetAddress)
         try container.encode(city, forKey: .city)
         try container.encode(zip, forKey: .zip)
+        try container.encode(itemName, forKey: .itemName)
+        try container.encode(didExtraFrosting, forKey: .didExtraFrosting)
+        try container.encode(didAddFrosting, forKey: .didAddFrosting)
     }
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -82,6 +103,47 @@ class Order: ObservableObject, Codable {
         city = try container.decode(String.self, forKey: .city)
         zip = try container.decode(String.self, forKey: .zip)
         
+        
+        itemName = try container.decode(String.self, forKey: .itemName)
+        
+        didExtraFrosting = try container.decode(String.self, forKey: .didExtraFrosting)
+        didAddFrosting = try container.decode(String.self, forKey: .didAddFrosting)
+        
     }
+    
+    func typeIdentify() {
+        if (type == 0){
+            itemName = "vanilla"
+            
+        }
+        else if (type == 1){
+            itemName = "Strawberry"
+            
+        }
+        else if (type == 2){
+           itemName = "choclate"
+            
+        }
+        if (type == 3){
+            itemName = "rainbow"
+            
+        }
+    }
+    func specialRequirements(){
+        if extraFrosting == false{
+            didExtraFrosting = " No extraFrosting"
+        }
+        else{
+            didExtraFrosting = "extraFrosting"
+        }
+        if addSprinkles == false{
+            didAddFrosting = " No addSprinkles"
+        }
+        else{
+            didAddFrosting = "addSprinkles"
+        }
+    }
+    
+    
     
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001586842AF4BBB7008BF970 /* OrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001586832AF4BBB7008BF970 /* OrderDetails.swift */; };
+		0015868B2AF5003B008BF970 /* orderData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 001586892AF5003B008BF970 /* orderData.xcdatamodeld */; };
 		004B4AE72AF21E3A0091160B /* cupcakeCornerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B4AE62AF21E3A0091160B /* cupcakeCornerApp.swift */; };
 		004B4AE92AF21E3A0091160B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B4AE82AF21E3A0091160B /* ContentView.swift */; };
 		004B4AEB2AF21E3B0091160B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004B4AEA2AF21E3B0091160B /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		001586832AF4BBB7008BF970 /* OrderDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetails.swift; sourceTree = "<group>"; };
+		0015868A2AF5003B008BF970 /* orderData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = orderData.xcdatamodel; sourceTree = "<group>"; };
 		004B4AE32AF21E3A0091160B /* cupcakeCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cupcakeCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		004B4AE62AF21E3A0091160B /* cupcakeCornerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cupcakeCornerApp.swift; sourceTree = "<group>"; };
 		004B4AE82AF21E3A0091160B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				004B4AE62AF21E3A0091160B /* cupcakeCornerApp.swift */,
+				001586832AF4BBB7008BF970 /* OrderDetails.swift */,
+				001586892AF5003B008BF970 /* orderData.xcdatamodeld */,
 				004B4AE82AF21E3A0091160B /* ContentView.swift */,
 				004B4AFE2AF2823E0091160B /* Order.swift */,
 				004B4B002AF28AE90091160B /* AddressView.swift */,
@@ -162,6 +168,8 @@
 				004B4B012AF28AE90091160B /* AddressView.swift in Sources */,
 				004B4AE72AF21E3A0091160B /* cupcakeCornerApp.swift in Sources */,
 				005553B22AF3B1AB0042AC3D /* CheckoutView.swift in Sources */,
+				001586842AF4BBB7008BF970 /* OrderDetails.swift in Sources */,
+				0015868B2AF5003B008BF970 /* orderData.xcdatamodeld in Sources */,
 				004B4AF52AF237A60091160B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +374,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		001586892AF5003B008BF970 /* orderData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0015868A2AF5003B008BF970 /* orderData.xcdatamodel */,
+			);
+			currentVersion = 0015868A2AF5003B008BF970 /* orderData.xcdatamodel */;
+			path = orderData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 004B4ADB2AF21E3A0091160B /* Project object */;
 }

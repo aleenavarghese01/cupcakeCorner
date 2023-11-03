@@ -8,29 +8,23 @@
 import SwiftUI
 
 struct CheckoutView: View {
-    @ObservedObject var order: Order
+    @ObservedObject var order = Order()
     
     @State private var confirmationMessage = ""
     @State private var showingConfirmation = false
+    @State private var isClicked = false
+    
     var body: some View {
         ScrollView{
             VStack{
-                //                AsyncImage(url: URL(string: "https://hws.dev/img/cupcakes@3x.jpg"),scale: 3){ image in
-                //                    image
-                //                        .resizable()
-                //                        .scaledToFit()
-                //
-                //
-                //                } placeholder:{
-                //                    ProgressView()
-                //                }
-                //                .frame(height: 233)
                 
                 Text("your total cost is \(order.cost, format: .currency(code: "USD"))")
                     .font(.title)
                     .padding(.vertical, 100)
                 
                 Button("place Order") {
+                    order.typeIdentify()
+                    order.specialRequirements()
                     Task{
                         await placeOrder()
                     }
@@ -39,13 +33,17 @@ struct CheckoutView: View {
         }
         .navigationTitle("check out")
         .navigationBarTitleDisplayMode(.inline)
+        
         .alert("thank you",isPresented: $showingConfirmation){
-            Button("ok") {}
+            Button("ok") {
+                isClicked.toggle()
+            }
         } message: {
             Text(confirmationMessage)
         }
-        
-        
+        .sheet(isPresented: $isClicked, content: {
+            OrderDetails(order: order)
+        })
     }
     
     func placeOrder() async {
